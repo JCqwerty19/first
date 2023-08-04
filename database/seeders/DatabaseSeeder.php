@@ -14,14 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Category::factory(5)->create();
-        Tag::factory(10)->create();
-        $posts = Post::factory(100)->create();
+        Category::factory()->create(5);
+        Tag::factory()->create(10);
+        $posts = Post::factory()->create(100);
 
         foreach($posts as $post)
         {
-            $tags = Tag::all()->random(5)->pluck('id');
-            $post->tags->attach($tags);
+            $tagsIds = $tags->random(5)->pluck('id');
+            $post->tags->attach($tagsIds);
         }
 
         // \App\Models\User::factory(10)->create();
