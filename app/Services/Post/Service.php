@@ -6,18 +6,26 @@ use App\Models\Post;
 
 class Service
 {
-    public function store()
+    public function store($data)
     {
+        $tags = $data('tags');
+        unset($data['tags']);
 
+        $post = Post::firstOrCreate($data);
+        $post->tags()->attach($tags);
     }
 
-    public function update()
+    public function update($data)
     {
+        $tags = $data(['tags']);
+        unset($data['tags']);
 
+        $post->firstOrUpdate($data);
+        $post->tags()->sync($tags);
     }
 
-    public function destroy()
+    public function destroy($post)
     {
-
+        $post->delete();
     }
 }
