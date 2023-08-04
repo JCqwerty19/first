@@ -9,8 +9,12 @@ use App\Models\Post;
 
 class StoreController extends BaseController
 {
-    public function __invoke(Post $post)
+    public function __invoke(StoreRequest $request)
     {
-        $data = request->validated();
+        $data = $request->validated();
+
+        $data->service->store($data);
+
+        return redirect()->route('posts.index');
     }
 }
