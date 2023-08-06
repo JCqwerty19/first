@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
 @section('title')
-Posts
+{{$category->title}}
 @endsection
 
 @section('content')

@@ -14,11 +14,11 @@ class IndexController extends BaseController
     public function __invoke()
     {
         $variables = [
-            'posts' => Post::pagenate(10),
+            'posts' => Post::paginate(10),
             'categories' => Category::all(),
             'tags' => Tag::all(),
         ];
 
-        return view('posts.index');
+        return view('posts.index', $variables);
     }
 }

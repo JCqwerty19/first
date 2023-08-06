@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
 @section('title')
-Posts
+{{$tag->title}}
 @endsection
 
 @section('content')

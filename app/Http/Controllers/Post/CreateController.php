@@ -12,11 +12,11 @@ class CreateController extends BaseController
 {
     public function __invoke()
     {
-        $vatiables = [
+        $variables = [
             'tags' => Tag::all(),
             'categories' => Category::all(),
         ];
 
-        return view('posts.create');
+        return view('posts.create', $variables);
     }
 }

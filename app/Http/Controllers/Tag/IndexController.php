@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Tag;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,17 +9,17 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
 
-class ShowController extends BaseController
+class IndexController extends Controller
 {
-    public function __invoke(Post $post)
+    public function __invoke(Tag $tag)
     {
         $variables = [
-            'post' => $post,
+            'posts' => $tag->posts()->paginate(10),
             'categories' => Category::all(),
             'tags' => Tag::all(),
-            'postTags' => $post->tags()->get(),
+            'tag' => $tag,
         ];
 
-        return view('posts.show', $variables);
+        return view('tags.index', $variables);
     }
 }
