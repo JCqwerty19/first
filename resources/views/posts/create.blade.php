@@ -9,11 +9,17 @@ Create
     @csrf
     <div class="mb-3">
         <label for="image" class="form-label">Image</label>
-        <input type="text" class="form-control" id="image" name="image" value="{{$old()->}}">
+        <input type="text" class="form-control" id="image" name="image" value="{{old('image')}}">
+        @error('image')
+        <p class="text-danger">$message</p>
+        @enderror
     </div>
     <div class="mb-3">
         <label for="content" class="form-label">Password</label>
-        <textarea type="text" class="form-control" id="content" name="content"></textarea>
+        <textarea type="text" class="form-control" id="content" name="content">{{old('content')}}</textarea>
+        @error('content')
+        <p class="text-danger">$message</p>
+        @enderror
     </div>
     <label for="category_id" class="form-label">Category</label>
     <section id="category_id" name="category_id">
