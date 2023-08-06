@@ -11,12 +11,13 @@ use App\Models\Tag;
 
 class ShowController extends BaseController
 {
-    public function __invoke()
+    public function __invoke(Post $post)
     {
         $variables = [
             'post' => $post,
             'categories' => Category::all(),
             'tags' => Tag::all(),
+            'postTags' => $post->tags->get(),
         ];
 
         return view('posts.show', $variables);

@@ -18,16 +18,16 @@ Route::get('/', function()
     return view('welcome');
 });
 
-// Route::group(['namespace' => 'Post'], function () 
-// {
-//     Route::get('/posts', 'IndexController')->name('posts.index');
-//     
-//     Route::get('/posts', 'CreateController')->name('posts.create');
-//     Route::post('/posts', 'StoreController')->name('posts.store');
-// 
-//     Route::get('/posts/edit/{post}', 'EditController')->name('posts.edit');
-//     Route::patch('/posts', 'UpdateController')->name('posts.update');
-// 
-//     Route::get('/posts/show/{post}', 'ShowController')->name('posts.show');
-//     Route::delete('/posts', 'DestroyController')->name('posts.destroy');
-// });
+Route::group(['namespace' => 'Post'], function () 
+{
+    Route::get('/posts', 'IndexController')->name('posts.index');
+    
+    Route::get('/posts', 'CreateController')->name('posts.create');
+    Route::post('/posts', 'StoreController')->name('posts.store');
+
+    Route::get('/posts/edit/{post}', 'EditController')->name('posts.edit');
+    Route::patch('/posts', 'UpdateController')->name('posts.update');
+
+    Route::get('/posts/show/{post}', 'ShowController')->name('posts.show');
+    Route::delete('/posts', 'DestroyController')->name('posts.destroy');
+});

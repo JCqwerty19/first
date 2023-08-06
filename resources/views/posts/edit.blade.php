@@ -31,11 +31,12 @@ Edit
     <section id="tags[]" name="tags">
         @foreach($tags as $tag)
             <option
-            @foreach($tags as $tag)
-
-            {{$post->tag->id === $category->id ? selected : ''}} value="{{$tag->id}}">{{$tag->title}}</option>
+            @foreach($post->tags as $postTag)
+            {{$post->tag === $tag->id ? selected : ''}}
+            @endforeach
+            value="{{$tag->id}}">{{$tag->title}}</option>
         @endforeach
     </section>
-    <button type="submit" class="btn btn-primary">Public</button>
+    <button type="submit" class="btn btn-primary">Update</button>
 </form>
 @endsection
