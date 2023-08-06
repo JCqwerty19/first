@@ -24,7 +24,7 @@ class PostFactory extends Factory
         return [
             'image' => $this->faker->imageUrl(),
             'content' => $this->faker->text,
-            'likes' => $this->faker->random_int(5, 2000),
+            'likes' => random_int(5, 2000),
             'category_id' => Category::get()->random()->id,
             'is_published' => 1,
         ];
