@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth\Login;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Login\BaseController;
 use Illuminate\Http\Request;
 
 class IndexController extends BaseController
 {
     public function __invoke()
     {
-        return view('auth.login.index');
+        return view('auth.login');
     }
 }

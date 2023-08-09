@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth\Login;
 
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Login\BaseController;
 use Illuminate\Http\Request;
 
 
@@ -15,6 +15,6 @@ class CheckController extends BaseController
 
         $this->service->login($data);
 
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.dashboard');
     }
 }
