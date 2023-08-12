@@ -35,10 +35,9 @@ Route::group(['namespace' => 'Auth'], function ()
     Route::post('/logout', 'LogoutController')->middleware('auth')->name('auth.logout');
 });
 
-Route::group(['namespace' => 'Guest', 'middleware' => 'guest'], function ()
+Route::group(['namespace' => 'Site'], function ()
 {
-    Route::get('/main', 'MainController')->name('guests.main');
-    Route::get('/posts/view/{post}', 'ViewController')->name('guests.view');
+    Route::get('/main', 'MainController')->name('site.main');
 });
 
 Route::group(['namespace' => 'Post'], function ()
@@ -51,9 +50,28 @@ Route::group(['namespace' => 'Post'], function ()
 
     Route::patch('/{post}/like', 'LikeController')->middleware('auth')->name('posts.like');
     Route::delete('/{post}/delete', 'DestroyController')->middleware('auth')->name('posts.destroy');
+
+    Route::get('/posts/{post}/show', 'ShowController')->name('posts.show');
+
+    Route::get('/tags', 'TagController')->name('tags.index');
 });
 
 Route::group(['namespace' => 'User'], function ()
 {
-    //
+    Route::get('/profile/{user}', 'ProfileController')->name('users.profile');
+    Route::get('/page', 'PageController')->middleware('auth')->name('users.page');
+    // Route::get('/settings')
+});
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function ()
+{
+    Route::get('/users', 'UsersController')->name('admin.users');
+    Route::get('/posts', 'PostsController')->name('admin.posts');
+    Route::get('/posts', 'TagsController')->name('admin.tags');
+});
+
+Route::group(['namespace' => 'Social'], function ()
+{
+    Route::get('/about', 'AboutController')->name('socials.about');
+    Route::get('/contacts', 'ContactsController')->name('socials.contacts');
 });

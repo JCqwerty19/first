@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
 @section('title')
-Register
+About
 @endsection
 
 @section('navbar')
@@ -32,34 +32,12 @@ Main
 </div>
 @else
 <a type="button" class="btn btn-outline-light me-2" href="{{route('auth.login')}}">Login</a>
+<a type="button" class="btn btn-warning" href="{{route('auth.register')}}">Register</a>
 @endif
 @endsection
 
 @section('content')
-<main class="form-signin w-100 m-auto">
-    <form action="{{route('auth.attempt')}}" method="post" novalidate>
-        @csrf
-        <h1 class="h3 mb-3 fw-normal">Please Register</h1>
-        <div class="form-floating">
-            <input type="username" class="form-control" value="{{old('email')}}" name="username" id="username" placeholder="John Johnson">
-            <label for="username">Name</label>
-            @error('username')
-            <p class="text-danger">{{$message}}</p>
-            @enderror
-        </div>
-        <div class="form-floating">
-            <input type="email" class="form-control" value="{{old('email')}}" name="email" id="email" placeholder="name@example.com">
-            <label for="email">Email address</label>
-            @error('email')
-            <p class="text-danger">{{$message}}</p>
-            @enderror
-        </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" value="{{old('password')}}" name="password" id="password" placeholder="Password">
-            <label for="password">Password</label>
-        </div>
-        <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
-        <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
-    </form>
-</main>
+<h1>About Page</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultrices, nisi sed laoreet ullamcorper, neque augue mollis ligula, vel placerat lectus lacus ac felis. In hac habitasse platea dictumst. Donec bibendum sem vitae ex egestas, nec tempus metus cursus.</p>
+<p>Integer vestibulum massa et bibendum fermentum. Vivamus non interdum augue, vitae scelerisque ex. Praesent nec ligula eu urna elementum feugiat eget a nibh. Curabitur non libero vel nunc commodo tempor nec a dolor.</p>
 @endsection

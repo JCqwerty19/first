@@ -14,6 +14,6 @@ class AttemptController extends BaseController
 
         $this->service->attempt($data);
 
-        return redirect()->route('users.home');
+        return redirect()->route('site.main');
     }
 }

@@ -27,8 +27,9 @@ class StoreRequest extends FormRequest
         [
             'image' => 'required',
             'content' => '',
-            'user' => '',
+            'user_id' => '',
             'tags' => '',
+            
         ];
     }
 }

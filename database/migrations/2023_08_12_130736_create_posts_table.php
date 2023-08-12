@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('image');
             $table->text('content')->nullable();
             $table->unsignedBigInteger('likes')->default(0);
+            $table->unsignedBigInteger('user_id');
             $table->boolean('is_published')->default(1);
             $table->timestamps();
             $table->softDeletes();

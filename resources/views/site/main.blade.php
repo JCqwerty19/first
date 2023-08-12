@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
 @section('title')
-Register
+Main
 @endsection
 
 @section('navbar')
@@ -32,34 +32,27 @@ Main
 </div>
 @else
 <a type="button" class="btn btn-outline-light me-2" href="{{route('auth.login')}}">Login</a>
+<a type="button" class="btn btn-warning" href="{{route('auth.register')}}">Register</a>
 @endif
 @endsection
 
 @section('content')
-<main class="form-signin w-100 m-auto">
-    <form action="{{route('auth.attempt')}}" method="post" novalidate>
-        @csrf
-        <h1 class="h3 mb-3 fw-normal">Please Register</h1>
-        <div class="form-floating">
-            <input type="username" class="form-control" value="{{old('email')}}" name="username" id="username" placeholder="John Johnson">
-            <label for="username">Name</label>
-            @error('username')
-            <p class="text-danger">{{$message}}</p>
-            @enderror
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    @foreach($posts as $post)
+    <div class="col">
+        <div class="card shadow-sm">
+            <img src="{{$post->image}}" alt="Post image">
+            <div class="card-body">
+                <p class="card-text">{{$post->content}}</p><br><br>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a type="button" class="btn btn-sm btn-outline-secondary" href="{{route('posts.show', $post)}}">View</a>
+                    </div>
+                    <a href="{{route('users.profile', $post->user_id)}}"><small class="text-body-secondary">{{$post->user->username}}</small></a>
+                </div>
+            </div>
         </div>
-        <div class="form-floating">
-            <input type="email" class="form-control" value="{{old('email')}}" name="email" id="email" placeholder="name@example.com">
-            <label for="email">Email address</label>
-            @error('email')
-            <p class="text-danger">{{$message}}</p>
-            @enderror
-        </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" value="{{old('password')}}" name="password" id="password" placeholder="Password">
-            <label for="password">Password</label>
-        </div>
-        <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
-        <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
-    </form>
-</main>
+    </div>
+    @endforeach
+</div>
 @endsection

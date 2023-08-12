@@ -8,14 +8,12 @@ class Service
 {
     public function store($data)
     {
-        $user = $data['user'];
+        $data['user_id'] = auth()->user()->id;
         $tags = $data['tags'];
-        unset($data['user']);
         unset($data['tags']);
 
         $post = Post::create($data);
 
-        $post->user()->attach($user);
         $post->tags()->attach($tags);
     }
 

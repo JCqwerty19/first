@@ -14,6 +14,6 @@ class CreateController extends BaseController
 
         $this->service->create($data);
 
-        return redirect('users.home');
+        return redirect()->route('site.main');
     }
 }

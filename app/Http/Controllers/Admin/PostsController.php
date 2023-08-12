@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Guest;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Post;
 
-class MainController extends Controller
+class PostsController extends Controller
 {
     public function __invoke()
     {
         $posts = Post::all();
-        return view('guests.main', $posts);
+        return view('admin.posts', 'posts');
     }
 }

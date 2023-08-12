@@ -11,6 +11,6 @@ class LogoutController extends BaseController
     {
         $this->service->logout();
 
-        return redirect()->route('guests.main');
+        return redirect()->route('site.main');
     }
 }
