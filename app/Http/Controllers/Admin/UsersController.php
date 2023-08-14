@@ -11,7 +11,11 @@ class UsersController extends Controller
 {
     public function __invoke()
     {
-        $users = User::all();
-        return view('admin.users', 'users');
+        $variables =
+        [
+            'users' => User::all(),
+        ];
+
+        return view('admin.users', $variables);
     }
 }

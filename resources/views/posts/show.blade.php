@@ -77,8 +77,8 @@ Main
                 @if(Auth::user() !== null)
                 <form action="{{route('posts.comment', $post)}}" method="post" novalidate>
                     @csrf
-                    <input type="text" class="form-control" value="{{old('content')}}" name="content">
-                    <button type="submit">Publish</button>
+                    <input type="text" class="form-control" value="{{old('content')}}" name="content"><br>
+                    <button class="btn btn-primary" type="submit">Publish</button>
                 </form>
                 @endif
 

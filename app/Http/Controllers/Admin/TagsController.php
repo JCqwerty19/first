@@ -11,7 +11,11 @@ class TagsController extends Controller
 {
     public function __invoke()
     {
-        $tags = Tag::all();
-        return view('admin.tags', 'tags');
+        $variables =
+        [
+            'tags' => Tag::all(),
+        ];
+
+        return view('admin.tags', $variables);
     }
 }

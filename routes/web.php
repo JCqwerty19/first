@@ -24,22 +24,32 @@ Route::get('/', function () {
 
 // type, class, value, name, id, placeholder, other,
 
+// Authentication
 Route::group(['namespace' => 'Auth'], function ()
 {
+    // Login
     Route::get('/login', 'LoginController')->middleware('guest')->name('auth.login');
     Route::post('/login', 'AttemptController')->middleware('guest')->name('auth.attempt');
 
+    // Registration
     Route::get('/register', 'RegisterController')->middleware('guest')->name('auth.register');
     Route::post('/register', "CreateController")->middleware('guest')->name('auth.create');
 
+    // Logout
     Route::post('/logout', 'LogoutController')->middleware('auth')->name('auth.logout');
 });
 
+
+
+// Site page
 Route::group(['namespace' => 'Site'], function ()
 {
     Route::get('/main', 'MainController')->name('site.main');
 });
 
+
+
+// Posts
 Route::group(['namespace' => 'Post'], function ()
 {
     Route::get('/create', 'CreateController')->middleware('auth')->name('posts.create');
@@ -57,6 +67,9 @@ Route::group(['namespace' => 'Post'], function ()
     Route::get('/tags', 'TagController')->name('tags.index');
 });
 
+
+
+// Users
 Route::group(['namespace' => 'User'], function ()
 {
     Route::get('/profile/{user}', 'ProfileController')->name('users.profile');
@@ -64,13 +77,18 @@ Route::group(['namespace' => 'User'], function ()
     // Route::get('/settings')
 });
 
+
+
+// Admin 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function ()
 {
     Route::get('/users', 'UsersController')->name('admin.users');
-    Route::get('/posts', 'PostsController')->name('admin.posts');
-    Route::get('/posts', 'TagsController')->name('admin.tags');
+    Route::get('/tags', 'TagsController')->name('admin.tags');
 });
 
+
+
+// Social
 Route::group(['namespace' => 'Social'], function ()
 {
     Route::get('/about', 'AboutController')->name('socials.about');

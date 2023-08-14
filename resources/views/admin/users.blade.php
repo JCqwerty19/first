@@ -1,8 +1,9 @@
 @extends('layouts.navbar')
 
 @section('title')
-New Post
+Users
 @endsection
+
 
 @section('navbar')
 <li><a href="{{route('site.main')}}" class="nav-link px-2 text-white">
@@ -36,32 +37,24 @@ Main
 @endif
 @endsection
 
+
 @section('content')
-<h1>New Post</h1>
-<form action="{{route('posts.store')}}" method="post">
-    @csrf
-    <div class="form-group">
-        <label for="image">Image</label>
-        <input type="text" class="form-control" value="{{old('image')}}" name="image" id="image" placeholder="Link to image">
-    </div>
-    @error('image')
-        <p class="text-danger">{{$message}}</p>
-    @enderror
-    <div class="form-group">
-        <label for="content">Content</label><br>
-        <textarea name="content" id="content" rows="4">{{old('content')}}</textarea>
-    </div>
-    @error('content')
-        <p class="text-danger">{{$message}}</p>
-    @enderror
-    <div class="form-group">
-        <label for="tags">Tags</label><br>
-        <select name="tags[]" id="tags">
-            @foreach($tags as $tag)
-            <option value="{{$tag->id}}">{{$tag->title}}</option>
-            @endforeach
-        </select>
-    </div> <br>
-    <button type="submit" class="btn btn-primary">Publish</button>
-</form>
+<h1>Список пользователей</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Profile</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($users as $user)
+            <td>{{$user->username}}</td>
+            <td>{{$user->email}}</td>
+            <td><a href="{{route('users.profile', $user)}}"><button type="button" class="btn btn-primary">View</button></a></td>
+        @endforeach
+        <tr>
+    </tbody>
+</table>
 @endsection

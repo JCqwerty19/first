@@ -5,10 +5,17 @@ namespace App\Http\Controllers\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Tag;
+
 class CreateController extends BaseController
 {
     public function __invoke()
     {
-        return view('posts.create');
+        $variables =
+        [
+            'tags' => Tag::all(),
+        ];
+
+        return view('posts.create', $variables);
     }
 }

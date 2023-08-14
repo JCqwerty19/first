@@ -5,7 +5,7 @@ namespace App\Policies;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Models\User;
 
-class UserPolicy
+class AdminPolicy
 {
     use HandlesAuthorization;
 
@@ -29,7 +29,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-
+        //
     }
 
     /**

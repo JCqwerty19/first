@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 use App\Models\Post;
 
-class DestroyController extends Controller
+class DestroyController extends BaseController
 {
     public function __invoke(Post $post)
     {
         $this->service->destroy($post);
 
-        return redirect()->route('users.profile');
+        return redirect()->route('users.profile', auth()->user()->id);
     }
 }

@@ -28,6 +28,7 @@ class CreateRequest extends FormRequest
             'username' => 'required|string',
             'email' => 'required|email',
             'password' => 'required',    
+            'avatar' => '',
         ];
     }
 }
