@@ -20,7 +20,7 @@ Main
 @if(Auth::user() !== null)
 <div class="dropdown text-end">
     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="{{auth->user->avatar}}" alt="avatar" width="32" height="32" class="rounded-circle">
+        <img src="{{auth()->user()->avatar}}" alt="avatar" width="32" height="32" class="rounded-circle">
     </a>
     <ul class="dropdown-menu text-small">
         <li><a class="dropdown-item" href="{{route('posts.create')}}">New post</a></li>
@@ -32,12 +32,13 @@ Main
 </div>
 @else
 <a type="button" class="btn btn-outline-light me-2" href="{{route('auth.login')}}">Login</a>
+<a type="button" class="btn btn-warning" href="{{route('auth.register')}}">Register</a>
 @endif
 @endsection
 
 @section('content')
 <main class="form-signin w-100 m-auto">
-    <form action="{{route('auth.attempt')}}" method="post" novalidate>
+    <form action="{{route('auth.create')}}" method="post" novalidate>
         @csrf
         <h1 class="h3 mb-3 fw-normal">Please Register</h1>
         <div class="form-floating">

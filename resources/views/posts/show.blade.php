@@ -20,7 +20,7 @@ Main
 @if(Auth::user() !== null)
 <div class="dropdown text-end">
     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="{{auth->user->avatar}}" alt="avatar" width="32" height="32" class="rounded-circle">
+        <img src="{{auth()->user()->avatar}}" alt="avatar" width="32" height="32" class="rounded-circle">
     </a>
     <ul class="dropdown-menu text-small">
         <li><a class="dropdown-item" href="{{route('posts.create')}}">New post</a></li>
@@ -42,14 +42,18 @@ Main
         <div class="card mt-5">
             <img src="{{$post->image}}" class="card-img-top" alt="Photo">
             <div class="card-body">
+
+                <!--Post-->    
                 <a href="{{route('users.profile', $post->user_id)}}"><h5 class="card-title">{{$post->user->username}}</h5></a>
                 <p class="card-text">{{$post->content}}</p>
-                <!--Post-->
+
+                <!--Like-->
                 <form action="{{route('posts.like', $post)}}" method="post" novalidate>
                     @csrf
                     @method('patch')
-                    <button type="submit"><i class="bi bi-star-fill"></i></button> 
+                    <button type="submit" class="btn btn-primary">Like</button>
                 </form>
+                <p>{{$post->likes}}</p>
     
                 <!--Tags-->
                 <p class="card-text">
@@ -71,9 +75,9 @@ Main
                 <hr>
                 <h5>Comments</h5>
                 @if(Auth::user() !== null)
-                <form action="{{route('comments.store')}}" method="post" novalidate>
+                <form action="{{route('posts.comment', $post)}}" method="post" novalidate>
                     @csrf
-                    <input type="text" class="form-control" value="{{old('content')}}">
+                    <input type="text" class="form-control" value="{{old('content')}}" name="content">
                     <button type="submit">Publish</button>
                 </form>
                 @endif
@@ -82,7 +86,7 @@ Main
                 <hr>
                 <div class="media mt-3">
                     @foreach($comments as $comment)
-                    <a href="{{route('users.profile', $comment->user_id)}}"><img src="$comment->user->image" class="mr-3" alt="img"></a>
+                    <a href="{{route('users.profile', $comment->user_id)}}"><img src="{{$comment->user->avatar}}" class="mr-3" alt="img"></a>
                     <div class="media-body">
                         <a href="{{route('users.profile', $comment->user_id)}}"><h5 class="mt-0">{{$comment->user->username}}</h5></a>
                         <p>{{$comment->content}}</p>

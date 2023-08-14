@@ -3,6 +3,7 @@
 namespace App\Services\Post;
 
 use App\Models\Post;
+use App\Models\Comment;
 
 class Service
 {
@@ -34,6 +35,15 @@ class Service
         ];
 
         $post->update($data);
+    }
+
+    public function comment($post, $data)
+    {
+        $data['post_id'] = $post->id;
+        $data['user_id'] = auth()->user()->id;
+        
+        Comment::create($data);
+        
     }
 
     public function destroy($post)

@@ -50,6 +50,7 @@ Route::group(['namespace' => 'Post'], function ()
 
     Route::patch('/{post}/like', 'LikeController')->middleware('auth')->name('posts.like');
     Route::delete('/{post}/delete', 'DestroyController')->middleware('auth')->name('posts.destroy');
+    Route::post('/{post}/comment', 'CommentController')->middleware('auth')->name('posts.comment');
 
     Route::get('/posts/{post}/show', 'ShowController')->name('posts.show');
 

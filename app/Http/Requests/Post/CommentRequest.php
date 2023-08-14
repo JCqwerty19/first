@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRequest extends FormRequest
+class CommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,9 @@ class CreateRequest extends FormRequest
     {
         return
         [
-            'username' => 'required|string',
-            'email' => 'required|email',
-            'password' => 'required',    
+            'content' => 'required',
+            'post_id' => '',
+            'user_id' => '',
         ];
     }
 }

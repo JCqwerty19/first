@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        UserFactory::factory(3000)->create();
-        $posts = PostFactory::factory(9000)->create();
-        CommentFactory::factory(11000)->create();
-        $tags = TagFactory::factory(100)->create();
+        User::factory(200)->create();
+        $posts = Post::factory(600)->create();
+        Comment::factory(700)->create();
+        $tags = Tag::factory(20)->create();
 
         $posts->tags()->attach($tags);
 

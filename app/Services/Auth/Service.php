@@ -11,14 +11,20 @@ class Service
 {
     public function attempt($data)
     {
+        $errors =
+        [
+            'email' => 'This email have not registered in site',
+        ];
+
         if (!Auth::attempt($data))
         {
-            return back()->withInputs()->withErrors();
+            return back()->withInputs()->withErrors($errors);
         }
     }
 
     public function create($data)
     {
+        $data['avatar'] = 'https://cdn-icons-png.flaticon.com/128/149/149071.png';
         $user = User::create($data);
         Auth::login($user);
     }
