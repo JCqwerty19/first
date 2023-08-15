@@ -29,12 +29,7 @@ class AdminPolicy
      */
     public function view(User $user, User $model)
     {
-        if ($model->status !== 'admin')
-        {
-            return false;
-        }
-
-        //retrurn $model->status === 'admin';
+        return $model->status === 'admin';
     }
 
     /**

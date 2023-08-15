@@ -13,7 +13,7 @@ class UsersController extends Controller
     {
         $variables =
         [
-            'users' => User::all(),
+            'users' => User::paginate(20),
         ];
 
         return view('admin.users', $variables);

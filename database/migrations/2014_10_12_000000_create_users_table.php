@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('status')->default('user');
             $table->string('username');
             $table->string('avatar')->default('https://cdn-icons-png.flaticon.com/128/149/149071.png');
-            $table->string('about')->nullable();
+            $table->string('about')->default('Hello!');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

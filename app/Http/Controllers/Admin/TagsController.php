@@ -13,7 +13,7 @@ class TagsController extends Controller
     {
         $variables =
         [
-            'tags' => Tag::all(),
+            'tags' => Tag::paginate(15),
         ];
 
         return view('admin.tags', $variables);

@@ -16,6 +16,10 @@ class UpdateController extends BaseController
 
         $this->service->update($data, $user);
 
-        return back();
+        $variables =
+        [
+            'user' => $user,
+        ];
+        return redirect()->route('users.profile', $user);
     }
 }

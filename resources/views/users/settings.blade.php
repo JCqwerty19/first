@@ -27,14 +27,6 @@ Settings
         <input type="email" class="form-control" value="{{$user->email}}" name="email" id="email" placeholder="name@example.com">
     </div>
     <hr>
-    <div class="form-group">
-        <label for="password">Old password</label>
-        <input type="password" class="form-control" name="old_password" id="password" placeholder="Old password">
-    </div>
-    <div class="form-group">
-        <label for="password">New password</label>
-        <input type="password" class="form-control" name="password" id="password" placeholder="New password">
-    </div>
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
 @endsection

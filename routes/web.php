@@ -17,10 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// 3 Admin Policy
 // 4 Settings
 // 5 Frontend
-// 6 Clear
 
 
 
@@ -94,7 +92,7 @@ Route::group(['namespace' => 'User'], function ()
     
     // Settings
     Route::get('/settings', 'SettingsController')->middleware('auth')->name('users.settings');
-    Route::patch('/settings', 'UpdateController')->middleware('auth')->name('users.update');
+    Route::patch('/settings/{user}', 'UpdateController')->middleware('auth')->name('users.update');
 });
 
 
@@ -107,9 +105,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admi
 
     // Users
     Route::get('/users', 'UsersController')->name('admin.users');
+    Route::delete('/users/destroy/{user}', 'UserDestroyController')->name('admin.users.destroy');
 
     // Tags
     Route::get('/tags', 'TagsController')->name('admin.tags');
+    Route::delete('/tags/destroy/{tag}', 'TagDestroyController')->name('admin.tags.destroy');
 });
 
 

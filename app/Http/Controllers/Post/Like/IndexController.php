@@ -17,14 +17,6 @@ class IndexController extends Controller
             'post' => $post,
         ];
 
-        $post = Post::find(5);
-        foreach($post->likes as $like)
-        {
-            dd($like->user);
-        }
-        dd($post->likes);
-
-
         return view('posts.likes', $variables);
 
 

@@ -31,18 +31,20 @@
                 </form>
                 <a href="{{route('likes.index', $post)}}">Show</a>
                 
+                @if(Auth::user() !== null)
                 <!--Delete-->
-                @if($post->user_id === Auth::id())
+                @if($post->user_id === Auth::id() || Auth::user()->status === 'admin')
                 <form action="{{route('posts.destroy', $post)}}" method="post" novalidate>
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
                 @endif
+                @endif
 
                 <!--Form for comment-->
                 <hr>
-                <h5>Comments</h5>
+                <h5>Comments: {{$post->comments->count()}}</h5>
                 @if(Auth::user() !== null)
                 <form action="{{route('comments.comment', $post)}}" method="post" novalidate>
                     @csrf
@@ -53,13 +55,14 @@
 
                 <!--Comments-->
                 <hr>
+                @if(Auth::user() !== null)
                 <div class="media mt-3">
                     @foreach($comments as $comment)
                     <a href="{{route('users.profile', $comment->user_id)}}"><img src="{{$comment->user->avatar}}" class="mr-3" alt="img"></a>
                     <div class="media-body">
                         <a href="{{route('users.profile', $comment->user_id)}}"><h5 class="mt-0">{{$comment->user->username}}</h5></a>
                         <p>{{$comment->content}}</p>
-                        @if($comment->user_id === Auth::user()->id)
+                        @if($comment->user_id === Auth::user()->id || Auth::user()->status === 'admin')
                         <form action="{{route('comments.destroy', $comment)}}" method="post">
                             @csrf
                             @method('delete')
@@ -70,6 +73,9 @@
                     <hr>
                     @endforeach
                 </div>
+                @else
+                <p><a href="{{route('auth.login')}}">Login</a> for view comments</p>
+                @endif
             </div>
         </div>
     </div>

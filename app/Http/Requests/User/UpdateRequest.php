@@ -29,8 +29,6 @@ class UpdateRequest extends FormRequest
             'avatar' => '',
             'about' => '',
             'email' => 'email',
-            'old_password' => 'password',
-            'password' => '',
         ];
     }
 }
