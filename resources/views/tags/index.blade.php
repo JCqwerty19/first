@@ -23,5 +23,4 @@
     </div>
     @endforeach
 </div><br>
-{{$posts->links()}}
 @endsection

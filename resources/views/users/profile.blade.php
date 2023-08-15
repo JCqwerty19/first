@@ -15,8 +15,18 @@
         <h2>About:</h2>
         <span>{{$user->about}}</span>
     </div>
-</div>
+</div><br><br>
+@if(Auth::user() !== null)
 
+@if(Auth::user()->status === 'admin')
+
+@endif
+<form action="{{route('admin.users.destroy', $user)}}" method="post">
+    @csrf
+    @method('delete')
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+@endif
 <div class="row mt-4">
     <div class="col-md-12">
         <!-- Список постов -->
