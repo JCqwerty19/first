@@ -8,6 +8,7 @@ use App\Models\Like;
 
 class Service
 {
+    // Create post
     public function store($data)
     {
         $data['user_id'] = auth()->user()->id;
@@ -19,6 +20,8 @@ class Service
         $post->tags()->attach($tags);
     }
 
+    
+    // Update post
     public function update($post, $data)
     {
         $tags = $data['tags'];
@@ -28,6 +31,8 @@ class Service
         $post->tags()->sync($tags);
     }
 
+
+    // Like post
     public function like($post)
     {
         $data =
@@ -39,11 +44,15 @@ class Service
         Like::create($data);
     }
 
+
+    // Restrict like
     public function unlike($like)
     {
         $like->delete();
     }
 
+
+    // Comment post
     public function comment($post, $data)
     {
         $data['post_id'] = $post->id;
@@ -53,6 +62,15 @@ class Service
         
     }
 
+
+    // Delete comment
+    public function destroyComment($comment)
+    {
+        $comment->delete();
+    }
+
+
+    // Delete post
     public function destroy($post)
     {
         $post->delete();

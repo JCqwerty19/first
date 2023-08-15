@@ -17,18 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Auth
-// Guest = Post, Tags
-// User = Post, Comment, Tags
-// Admin = Users, Post, Comment, Tags CRUD all
-
-// type, class, value, name, id, placeholder, other,
-
-// Frontend
-// Clrear
-
-// 1 Likes belongs + list
-// 2 Comments belongs + list
 // 3 Admin Policy
 // 4 Settings
 // 5 Frontend
@@ -49,8 +37,6 @@ Route::group(['namespace' => 'Auth'], function ()
 
     // Logout
     Route::post('/logout', 'LogoutController')->middleware('auth')->name('auth.logout');
-    
-    // Hash password
 });
 
 
@@ -78,21 +64,24 @@ Route::group(['namespace' => 'Post'], function ()
     Route::group(['namespace' => 'Comment', 'prefix' => 'comments'], function ()
     {
         Route::post('/{post}', 'CommentController')->middleware('auth')->name('comments.comment');
+        Route::delete('/{comment}/delete', 'DestroyController')->middleware('auth')->name('comments.destroy');
     });
+
     // Likes
     Route::group(['namespace' => 'Like', 'prefix' => 'likes'], function ()
     {
         Route::get('/index/{post}', 'IndexController')->name('likes.index');
         Route::patch('/{post}', 'LikeController')->middleware('auth')->name('likes.like');
-        Route::delete('/{post}', 'UnlikeController')->middleware('auth')->name('likes.unlike');
     });
 
-    Route::delete('/{post}/delete', 'DestroyController')->middleware('auth')->name('posts.destroy');
-    Route::get('/posts/{post}/show', 'ShowController')->name('posts.show');
-    Route::get('/tags', 'TagController')->name('tags.index');
+    // Post
+    Route::get('/show/{post}', 'ShowController')->name('posts.show');
 
-    // Likes belogns to many
-    // amount of likes and comments
+    // Tag
+    Route::get('/tags/{tag}', 'TagController')->name('tags.index');
+
+    // Destroy
+    Route::delete('/delete/{post}', 'DestroyController')->middleware('auth')->name('posts.destroy');
 });
 
 
@@ -100,9 +89,10 @@ Route::group(['namespace' => 'Post'], function ()
 // Users
 Route::group(['namespace' => 'User'], function ()
 {
+    // Profile
     Route::get('/profile/{user}', 'ProfileController')->name('users.profile');
-    Route::get('/page', 'PageController')->middleware('auth')->name('users.page');
     
+    // Settings
     Route::get('/settings', 'SettingsController')->middleware('auth')->name('users.settings');
     Route::patch('/settings', 'UpdateController')->middleware('auth')->name('users.update');
 });
@@ -112,8 +102,13 @@ Route::group(['namespace' => 'User'], function ()
 // Admin 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function ()
 {
+    // Admin Panel
     Route::get('/panel', 'IndexController')->name('admin.index');
+
+    // Users
     Route::get('/users', 'UsersController')->name('admin.users');
+
+    // Tags
     Route::get('/tags', 'TagsController')->name('admin.tags');
 });
 
@@ -122,6 +117,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admi
 // Social
 Route::group(['namespace' => 'Social'], function ()
 {
+    // About
     Route::get('/about', 'AboutController')->name('socials.about');
+
+    // Contacts
     Route::get('/contacts', 'ContactsController')->name('socials.contacts');
 });

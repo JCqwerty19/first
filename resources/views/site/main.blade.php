@@ -22,5 +22,6 @@ Main
         </div>
     </div>
     @endforeach
-</div>
+</div><br>
+{{$posts->links()}}
 @endsection

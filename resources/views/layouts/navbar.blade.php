@@ -46,9 +46,14 @@
                         <ul class="dropdown-menu text-small">
                             <li><a class="dropdown-item" href="{{route('posts.create')}}">New post</a></li>
                             <li><a class="dropdown-item" href="{{route('users.settings')}}">Settings</a></li>
-                            <li><a class="dropdown-item" href="{{route('users.page')}}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{route('users.profile', Auth::user())}}">Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{route('auth.logout')}}">Logout</a></li>
+                            <li>
+                                <form action="{{route('auth.logout')}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 @else
@@ -65,4 +70,4 @@
     </div>
 </body>
 <script type="text/javascript" src="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js')}}"></script>
-</html>
+</html><br><br><br><br>

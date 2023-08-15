@@ -14,32 +14,23 @@
                 <!--Post-->    
                 <a href="{{route('users.profile', $post->user_id)}}"><h5 class="card-title">{{$post->user->username}}</h5></a>
                 <p class="card-text">{{$post->content}}</p>
-                
-                <!--Like-->
-                <p>{{$likes}} </p>
-                @if($post->likes->where('post_id', $post->id) === false)
-                <form action="{{route('likes.unlike', $post)}}" method="post" novalidate>
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-primary">Unlike</button>
-                </form>
-                @else
-                <form action="{{route('likes.like', $post)}}" method="post" novalidate>
-                    @csrf
-                    @method('patch')
-                    <button type="submit" class="btn btn-primary">Like</button>
-                </form>
-                @endif
-                <a href="{{route('likes.index', $post)}}">Show</a>
-                
-    
+
                 <!--Tags-->
                 <p class="card-text">
                     @foreach($post->tags as $tag)
                     <a href="{{route('tags.index', $tag)}}">#{{$tag->title}}<br></a>
                     @endforeach
                 </p>
-
+                
+                <!--Like-->
+                <p>Likes: {{$likes}} </p>
+                <form action="{{route('likes.like', $post)}}" method="post" novalidate>
+                    @csrf
+                    @method('patch')
+                    <button type="submit" class="btn btn-primary">Like</button>
+                </form>
+                <a href="{{route('likes.index', $post)}}">Show</a>
+                
                 <!--Delete-->
                 @if($post->user_id === Auth::id())
                 <form action="{{route('posts.destroy', $post)}}" method="post" novalidate>
@@ -68,6 +59,13 @@
                     <div class="media-body">
                         <a href="{{route('users.profile', $comment->user_id)}}"><h5 class="mt-0">{{$comment->user->username}}</h5></a>
                         <p>{{$comment->content}}</p>
+                        @if($comment->user_id === Auth::user()->id)
+                        <form action="{{route('comments.destroy', $comment)}}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                        @endif
                     </div>
                     <hr>
                     @endforeach

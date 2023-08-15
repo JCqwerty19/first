@@ -29,7 +29,6 @@ class StoreRequest extends FormRequest
             'content' => '',
             'user_id' => '',
             'tags' => '',
-            
         ];
     }
 }

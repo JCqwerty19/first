@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Post\Comment;
 
+use App\Http\Requests\Post\CommentRequest;
 use App\Http\Controllers\Post\BaseController;
 use Illuminate\Http\Request;
 

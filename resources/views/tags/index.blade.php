@@ -5,51 +5,23 @@
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        <div class="card mt-5">
-            <img src="{{$post->image}}" class="card-img-top" alt="Photo">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    @foreach($posts as $post)
+    <div class="col">
+        <div class="card shadow-sm">
+            <img src="{{$post->image}}" alt="Post image">
             <div class="card-body">
-                <a href="route('users.profile', $post->user_id)"><h5 class="card-title">{{$post->user->username}}</h5></a>
-                <p class="card-text">{{$post->content}}</p>
-                <form action="{{route('posts.like')}}" method="post" novalidate>
-                    @csrf
-                    <button type="submit" class=""><i class="bi bi-star-fill"></i></button> 
-                </form>
-                <hr>
-                <p class="card-text">
-                    @foreach($post->tags() as $tag)
-                    <a href="{{route('tags.index', $tag)}}">#{{$tag->title}}<br></a>
-                    @endforeach
-                </p>
-                @if($post->user_id === Auth::id())
-                <form action="{{route('posts.destroy', $post)}}" method="post" novalidate>
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-                @endif
-                <hr>
-                <h5>Comments</h5>
-                @if(Auth::user() !== null)
-                <form action="{{route('comments.store')}}" method="post" novalidate>
-                    @csrf
-                    <input type="text" class="form-control" value="{{old('content')}}">
-                    <button type="submit">Publish</button>
-                </form>
-                @endif
-                <hr>
-                <div class="media mt-3">
-                    @foreach($comments as $comment)
-                    <a href="{{route('users.profile', $comment->user_id)}}"><img src="$comment->user->image" class="mr-3" alt="img"></a>
-                    <div class="media-body">
-                        <a href="{{route('users.profile', $comment->user_id)}}"><h5 class="mt-0">{{$comment->user->username}}</h5></a>
-                        <p>{{$comment->content}}</p>
+                <p class="card-text">{{$post->content}}</p><br><br>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a type="button" class="btn btn-sm btn-outline-secondary" href="{{route('posts.show', $post)}}">View</a>
                     </div>
-                    @endforeach
+                    <a href="{{route('users.profile', $post->user_id)}}"><small class="text-body-secondary">{{$post->user->username}}</small></a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    @endforeach
+</div><br>
+{{$posts->links()}}
 @endsection

@@ -13,7 +13,7 @@ class MainController extends Controller
     {
         $variables =
         [
-            'posts' => Post::all(),
+            'posts' => Post::paginate(10),
         ];
 
         return view('site.main', $variables);

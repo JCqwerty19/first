@@ -12,9 +12,9 @@ class TagController extends BaseController
     public function __invoke(Tag $tag)
     {
         $variables = [
-            'posts' => $tag->posts,
+            'posts' => $tag->posts->paginate(10),
         ];
 
-        return view('tags.index', 'posts');
+        return view('site.main', $variables);
     }
 }

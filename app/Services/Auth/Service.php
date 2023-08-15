@@ -9,26 +9,26 @@ use App\Models\User;
 
 class Service
 {
+    // Login
     public function attempt($data)
     {
-        $errors =
-        [
-            'email' => 'This email have not registered in site',
-        ];
-
         if (!Auth::attempt($data))
         {
-            return back()->withInputs()->withErrors($errors);
+            return back();
         }
     }
 
+    // Create
     public function create($data)
     {
         $data['avatar'] = 'https://cdn-icons-png.flaticon.com/128/149/149071.png';
+        $data['password'] = Hash::make($data['password']);
+
         $user = User::create($data);
         Auth::login($user);
     }
 
+    // Logout
     public function logout()
     {
         Auth::logout();
