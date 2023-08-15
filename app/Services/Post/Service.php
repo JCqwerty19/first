@@ -4,6 +4,7 @@ namespace App\Services\Post;
 
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Like;
 
 class Service
 {
@@ -31,10 +32,16 @@ class Service
     {
         $data =
         [
-            'likes' => $post->likes + 1,
+            'user_id' => auth()->user()->id,
+            'post_id' => $post->id,
         ];
 
-        $post->update($data);
+        Like::create($data);
+    }
+
+    public function unlike($like)
+    {
+        $like->delete();
     }
 
     public function comment($post, $data)

@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Post\Comment;
 
-use App\Http\Requests\Post\CommentRequest;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Post\BaseController;
 use Illuminate\Http\Request;
 
 use App\Models\Post;

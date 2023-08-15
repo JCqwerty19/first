@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Like;
 
 class Post extends Model
 {
@@ -30,5 +31,10 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 }
